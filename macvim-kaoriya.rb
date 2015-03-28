@@ -19,6 +19,7 @@ class MacvimKaoriya < Formula
   PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
 # PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
+  GETTEXT        = "#{HOMEBREW_PREFIX}/Cellar/gettext/0.19.4"
 
   def install
     ENV.remove_macosxsdk
@@ -28,7 +29,7 @@ class MacvimKaoriya < Formula
     ENV.append 'LDFLAGS',                  "-mmacosx-version-min=#{MAC_VERSION} -headerpad_max_install_names"
     ENV.append 'VERSIONER_PERL_VERSION',   "#{PERL_VERSION}"
     ENV.append 'VERSIONER_PYTHON_VERSION', "#{PYTHON_VERSION}"
-    ENV.append 'vi_cv_path_python3',       "#{HOMEBREW_PREFIX}/bin/python3"
+#   ENV.append 'vi_cv_path_python3',       "#{HOMEBREW_PREFIX}/bin/python3"
 
     system './configure',
       '--disable-netbeans',
@@ -56,6 +57,12 @@ class MacvimKaoriya < Formula
 
     `rm src/po/ja.sjis.po`
     `touch src/po/ja.sjis.po`
+
+    gettext = "#{GETTEXT}/bin/"
+    inreplace 'src/po/Makefile' do |s|
+      s.gsub! /^(XGETTEXT\s*=.*)(xgettext.*)/, "\\1#{gettext}\\2"
+      s.gsub! /^(MSGMERGE\s*=.*)(msgmerge.*)/, "\\1#{gettext}\\2"
+    end
 
     Dir.chdir('src/po') {system 'make'}
     system 'make'
