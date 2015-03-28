@@ -19,7 +19,7 @@ class MacvimKaoriya < Formula
   PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
 # PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
-  GETTEXT        = "#{HOMEBREW_PREFIX}/Cellar/gettext/0.19.4"
+  GETTEXT        = "#{HOMEBREW_PREFIX}/opt/gettext"
 
   def install
     ENV.remove_macosxsdk
@@ -92,7 +92,7 @@ class MacvimKaoriya < Formula
     end
 
     [
-      "#{HOMEBREW_PREFIX}/opt/gettext-mk/lib/libintl.dylib",
+      "#{GETTEXT}/lib/libintl.dylib",
       "#{HOMEBREW_PREFIX}/lib/libmigemo.dylib",
     ].each do |lib|
       newname = "@executable_path/../Frameworks/#{File.basename(lib)}"
