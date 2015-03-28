@@ -6,7 +6,7 @@ class MacvimKaoriya < Formula
 
   depends_on 'cmigemo-mk'
   depends_on 'ctags'
-  depends_on 'gettext'
+  depends_on 'gettext-mk'
   depends_on 'python'
 # depends_on 'python3'
   depends_on 'ruby'
@@ -19,7 +19,7 @@ class MacvimKaoriya < Formula
   PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
 # PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
-  GETTEXT        = "#{HOMEBREW_PREFIX}/opt/gettext"
+  GETTEXT        = "#{HOMEBREW_PREFIX}/opt/gettext-mk"
 
   def install
     ENV.remove_macosxsdk
