@@ -4,7 +4,7 @@ class MacvimKaoriya < Formula
   homepage 'http://code.google.com/p/macvim-kaoriya/'
   head 'https://github.com/splhack/macvim.git', :branch => 'master'
 
-  depends_on 'cmigemo'
+  depends_on 'cmigemo-mk'
   depends_on 'ctags'
   depends_on 'gettext'
   depends_on 'python'
