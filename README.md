@@ -6,9 +6,7 @@ This repository is inspired at [splhack](https://github.com/splhack/homebrew-spl
 ## Usage
 ```bash
 $ brew tap 'kazuakim/macvim'
-$ brew install --HEAD cmigemo-mk
-$ brew install --HEAD gettext-mk
-$ brew install --HEAD macvim-kaoriya
+$ brew install macvim-kaoriya
 ```
 
 ##Author
