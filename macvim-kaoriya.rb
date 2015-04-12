@@ -58,7 +58,7 @@ class MacvimKaoriya < Formula
     `touch src/po/ja.sjis.po`
 
     gettext = "#{GETTEXT}/bin/"
-    inreplace 'src/po/Makefile' do |s|
+    inreplace 'src/po/Makefile.in.in' do |s|
       s.gsub! /^(XGETTEXT\s*=.*)(xgettext.*)/, "\\1#{gettext}\\2"
       s.gsub! /^(MSGMERGE\s*=.*)(msgmerge.*)/, "\\1#{gettext}\\2"
     end
