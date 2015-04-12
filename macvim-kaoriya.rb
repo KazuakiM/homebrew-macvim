@@ -1,12 +1,12 @@
 require 'formula'
 
 class MacvimKaoriya < Formula
-  homepage 'http://code.google.com/p/macvim-kaoriya/'
+  homepage 'https://github.com/splhack/macvim-kaoriya'
   head 'https://github.com/splhack/macvim.git'
 
   depends_on 'cmigemo-mk'
   depends_on 'ctags'
-  depends_on 'gettext-mk'
+  depends_on 'gettext'
   depends_on 'python'
 # depends_on 'python3'
   depends_on 'ruby'
@@ -19,7 +19,7 @@ class MacvimKaoriya < Formula
   PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
 # PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
-  GETTEXT        = "#{HOMEBREW_PREFIX}/opt/gettext-mk"
+  GETTEXT        = "#{HOMEBREW_PREFIX}/opt/gettext"
 
   def install
     ENV.remove_macosxsdk
