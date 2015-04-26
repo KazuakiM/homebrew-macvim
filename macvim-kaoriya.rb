@@ -14,8 +14,8 @@ class MacvimKaoriya < Formula
   depends_on 'luajit'
 
   MAC_VERSION    = `sw_vers -productVersion|tr -d '\n'`
-  PERL_VERSION   = `perl -v|grep version|awk '{print $9}'|sed 's/[(v|)]//g'`
-  PYTHON_VERSION = `python --version 2>&1|awk '{print $2}'`
+  PERL_VERSION   = `perl -v|grep version|awk '{print $9}'|sed 's/[(v|)]//g'|tr -d '\n'`
+  PYTHON_VERSION = `python --version 2>&1|awk '{print $2}'|tr -d '\n'`
   PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
 # PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
