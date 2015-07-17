@@ -7,6 +7,7 @@ class MacvimKaoriya < Formula
   depends_on 'cmigemo-mk'
   depends_on 'ctags'
   depends_on 'gettext'
+  depends_on 'perl'
   depends_on 'python'
 # depends_on 'python3'
   depends_on 'ruby'
