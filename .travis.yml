@@ -1,9 +1,12 @@
 # TravisCI
 #
 # @url: https://github.com/caskroom/homebrew-cask/blob/master/.travis.yml
+# @url: http://docs.travis-ci.com/user/languages/objective-c/
 #
-language: objective-c
-sudo:     false
+language:      objective-c
+xcode_project: MacVim.xcodeproj
+xcode_scheme:  MacVimTests
+sudo:          false
 
 # before_install steps
 # * update Homebrew
