@@ -1,0 +1,30 @@
+# TravisCI
+#
+# @url: https://github.com/caskroom/homebrew-cask/blob/master/.travis.yml
+#
+language: objective-c
+sudo:     false
+
+# before_install steps
+# * update Homebrew
+# * set PATH according to env matrix
+before_install:
+  - brew update
+  - brew install python ruby
+
+# install steps
+# * brew Formulae, install and version view
+install:
+  - brew tap 'kazuakim/macvim' && brew install --HEAD macvim-kaoriya
+  - printenv PATH
+  - /usr/bin/which lua    && lua    -v
+  - /usr/bin/which luajit && luajit -v
+  - /usr/bin/which perl   && perl   -v
+  - /usr/bin/which python && python --version
+  - /usr/bin/which ruby   && ruby   --version
+  - /usr/local/Cellar/macvim-kaoriya/HEAD/MacVim.app/Contents/MacOS/Vim --version
+
+notifications:
+  email: false
+
+# vim:fdl=0:sts=2:sw=2:ts=2

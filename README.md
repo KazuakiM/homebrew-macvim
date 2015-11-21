@@ -1,6 +1,8 @@
 homebrew-macvim
 ===
 
+[![Build Status](https://travis-ci.org/KazuakiM/homebrew-macvim.svg)](https://travis-ci.org/KazuakiM/homebrew-macvim)
+
 This repository is inspired at [splhack](https://github.com/splhack/homebrew-splhack).
 
 ## Usage
