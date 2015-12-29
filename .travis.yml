@@ -7,7 +7,7 @@ language: objective-c
 os:
   - osx
 
-osx_image:     xcode7.1
+osx_image:     xcode7.2
 xcode_project: MacVim.xcodeproj
 sudo:          false
 
@@ -23,6 +23,7 @@ before_install:
 install:
   - brew tap 'kazuakim/macvim' && brew install --HEAD macvim-kaoriya
   - printenv PATH
+  - /usr/bin/which ctags  && ctags  --version
   - /usr/bin/which lua    && lua    -v
   - /usr/bin/which luajit && luajit -v
   - /usr/bin/which perl   && perl   -v

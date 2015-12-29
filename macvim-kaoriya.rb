@@ -5,7 +5,8 @@ class MacvimKaoriya < Formula
   head 'https://github.com/splhack/macvim.git'
 
   depends_on 'cmigemo-mk'
-  depends_on 'ctags'
+#  depends_on 'ctags'
+  depends_on 'universal-ctags/homebrew-universal-ctags/universal-ctags'
   depends_on 'gettext'
   depends_on 'perl'
   depends_on 'python'
