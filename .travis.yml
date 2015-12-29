@@ -23,6 +23,7 @@ before_install:
 install:
   - brew tap 'kazuakim/macvim' && brew install --HEAD macvim-kaoriya
   - printenv PATH
+  - /usr/bin/which ctags  && ctags  --version
   - /usr/bin/which lua    && lua    -v
   - /usr/bin/which luajit && luajit -v
   - /usr/bin/which perl   && perl   -v
