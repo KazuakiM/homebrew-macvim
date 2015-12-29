@@ -1,37 +1,31 @@
 require 'formula'
 
 class MacvimKaoriya < Formula
+  desc 'GUI for vim, made for OS X'
   homepage 'https://github.com/splhack/macvim-kaoriya'
   head 'https://github.com/splhack/macvim.git'
 
-  depends_on 'cmigemo-mk'
-#  depends_on 'ctags'
-  depends_on 'universal-ctags/homebrew-universal-ctags/universal-ctags'
-  depends_on 'gettext'
-  depends_on 'perl'
-  depends_on 'python'
-# depends_on 'python3'
-  depends_on 'ruby'
-  depends_on 'lua'
-  depends_on 'luajit'
+  option 'with-override-system-vim', 'Override system vim'
 
-  MAC_VERSION    = `sw_vers -productVersion|tr -d '\n'`
-  PERL_VERSION   = `perl -v|grep version|awk '{print $9}'|sed 's/[(v|)]//g'|tr -d '\n'`
-  PYTHON_VERSION = `python --version 2>&1|awk '{print $2}'|tr -d '\n'`
+  deprecated_option 'override-system-vim' => 'with-override-system-vim'
+
+  depends_on 'cmigemo-mk'                                               => :build
+# depends_on 'ctags'                                                    => :build
+  depends_on 'universal-ctags/homebrew-universal-ctags/universal-ctags' => :build
+  depends_on 'gettext'                                                  => :build
+  depends_on 'perl'                                                     => :build
+  depends_on 'python'                                                   => :build
+# depends_on 'python3'                                                  => :build
+  depends_on 'ruby'                                                     => :build
+  depends_on 'lua'                                                      => :build
+  depends_on 'luajit'                                                   => :build
+
   PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
 # PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
-  GETTEXT        = "#{HOMEBREW_PREFIX}/opt/gettext"
 
   def install
-    ENV.remove_macosxsdk
-    ENV.macosxsdk "#{MAC_VERSION}"
-    ENV.append 'MACOSX_DEPLOYMENT_TARGET', "#{MAC_VERSION}"
-    ENV.append 'CFLAGS',                   "-mmacosx-version-min=#{MAC_VERSION}"
-    ENV.append 'LDFLAGS',                  "-mmacosx-version-min=#{MAC_VERSION} -headerpad_max_install_names"
-    ENV.append 'VERSIONER_PERL_VERSION',   "#{PERL_VERSION}"
-    ENV.append 'VERSIONER_PYTHON_VERSION', "#{PYTHON_VERSION}"
-#   ENV.append 'vi_cv_path_python3',       "#{HOMEBREW_PREFIX}/bin/python3"
+    ENV.clang if MacOS.version >= :lion
 
     system './configure',
       '--disable-netbeans',
@@ -55,17 +49,6 @@ class MacvimKaoriya < Formula
       '--with-luajit',
       "--with-lua-prefix=#{HOMEBREW_PREFIX}",
       '--with-tlib=ncurses'
-
-    `rm src/po/ja.sjis.po`
-    `touch src/po/ja.sjis.po`
-
-    gettext = "#{GETTEXT}/bin/"
-    inreplace 'src/po/Makefile' do |s|
-      s.gsub! /^(XGETTEXT\s*=.*)(xgettext.*)/, "\\1#{gettext}\\2"
-      s.gsub! /^(MSGMERGE\s*=.*)(msgmerge.*)/, "\\1#{gettext}\\2"
-    end
-
-    Dir.chdir('src/po') {system 'make'}
     system 'make'
 
     prefix.install 'src/MacVim/build/Release/MacVim.app'
@@ -76,7 +59,11 @@ class MacvimKaoriya < Formula
 
     macos.install 'src/MacVim/mvim'
     mvim = macos + 'mvim'
-    ['vimdiff', 'view', 'mvimdiff', 'mview'].each do |t|
+    [
+      'gview',   'gvim',     'gvimdiff',
+      'mview',   'mvimdiff',
+      'vimdiff', 'view'
+    ].each do |t|
       ln_s 'mvim', macos + t
     end
     inreplace mvim do |s|
@@ -84,21 +71,10 @@ class MacvimKaoriya < Formula
       s.gsub! /^(binary=).*/, "\\1\"`(cd \"$VIM_APP_DIR/MacVim.app/Contents/MacOS\"; pwd -P)`/Vim\""
     end
 
-    cp "#{HOMEBREW_PREFIX}/bin/ctags", macos
-
     dict = runtime + 'dict'
     mkdir_p dict
     Dir.glob("#{HOMEBREW_PREFIX}/share/migemo/utf-8/*").each do |f|
       cp f, dict
-    end
-
-    [
-      "#{GETTEXT}/lib/libintl.dylib",
-      "#{HOMEBREW_PREFIX}/lib/libmigemo.dylib",
-    ].each do |lib|
-      newname = "@executable_path/../Frameworks/#{File.basename(lib)}"
-      system "install_name_tool -change #{lib} #{newname} #{macos + 'Vim'}"
-      cp lib, app + 'Frameworks'
     end
   end
 end
