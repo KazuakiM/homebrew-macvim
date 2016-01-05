@@ -9,16 +9,16 @@ class MacvimKaoriya < Formula
 
   deprecated_option 'override-system-vim' => 'with-override-system-vim'
 
-  depends_on 'cmigemo-mk'                                               => :build
-# depends_on 'ctags'                                                    => :build
-  depends_on 'universal-ctags/homebrew-universal-ctags/universal-ctags' => :build
-  depends_on 'gettext'                                                  => :build
-  depends_on 'perl'                                                     => :build
-  depends_on 'python'                                                   => :build
-# depends_on 'python3'                                                  => :build
-  depends_on 'ruby'                                                     => :build
-  depends_on 'lua'                                                      => :build
-  depends_on 'luajit'                                                   => :build
+  depends_on 'cmigemo-mk'                                      => :build
+# depends_on 'ctags'                                           => :build
+  depends_on 'universal-ctags/universal-ctags/universal-ctags' => :build
+  depends_on 'gettext'                                         => :build
+  depends_on 'perl'                                            => :build
+  depends_on 'python'                                          => :build
+# depends_on 'python3'                                         => :build
+  depends_on 'ruby'                                            => :build
+  depends_on 'lua'                                             => :build
+  depends_on 'luajit'                                          => :build
 
   PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
 # PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
