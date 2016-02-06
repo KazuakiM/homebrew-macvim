@@ -10,18 +10,15 @@ class MacvimKaoriya < Formula
   deprecated_option 'override-system-vim' => 'with-override-system-vim'
 
   depends_on 'cmigemo-mk'                                      => :build
-# depends_on 'ctags'                                           => :build
   depends_on 'universal-ctags/universal-ctags/universal-ctags' => :build
   depends_on 'gettext'                                         => :build
   depends_on 'perl'                                            => :build
-  depends_on 'python'                                          => :build
-# depends_on 'python3'                                         => :build
+  depends_on 'python3'                                         => :build
   depends_on 'ruby'                                            => :build
   depends_on 'lua'                                             => :build
   depends_on 'luajit'                                          => :build
 
-  PYTHON_CONFIG  = `python-config --prefix|tr -d '\n'`
-# PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
+  PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
 
   def install
@@ -39,13 +36,11 @@ class MacvimKaoriya < Formula
       '--enable-multibyte',
       '--enable-rubyinterp',
       '--enable-perlinterp',
-      '--enable-pythoninterp',
-#     '--enable-python3interp',
+      '--enable-python3interp',
       "--prefix=#{prefix}",
       '--with-features=huge',
       "--with-ruby-command=#{RUBY_WHICH}",
-      "--with-python-config-dir=#{PYTHON_CONFIG}/lib/python2.7/config",
-#     "--with-python3-config-dir=#{PYTHON3_CONFIG}/lib/python3.4/config-3.4m",
+      "--with-python3-config-dir=#{PYTHON3_CONFIG}/lib/python3.5/config-3.5m",
       '--with-luajit',
       "--with-lua-prefix=#{HOMEBREW_PREFIX}",
       '--with-tlib=ncurses'
