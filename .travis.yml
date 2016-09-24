@@ -29,7 +29,7 @@ install:
   - /usr/bin/which perl    && perl    -v
   - /usr/bin/which python3 && python3 --version
   - /usr/bin/which ruby    && ruby    --version
-  - /usr/local/Cellar/macvim-kaoriya/HEAD/MacVim.app/Contents/MacOS/Vim --version
+  - /usr/local/opt/macvim-kaoriya/MacVim.app/Contents/MacOS/vim --version
 
 notifications:
   email: false
