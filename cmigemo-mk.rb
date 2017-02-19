@@ -6,10 +6,6 @@ class CmigemoMk < Formula
 
   depends_on 'nkf' => :build
 
-  def patches
-    DATA
-  end
-
   def install
     ENV.append 'LDFLAGS', '-headerpad_max_install_names'
 
@@ -18,7 +14,7 @@ class CmigemoMk < Formula
     cd 'dict' do
       system "make utf-8"
     end
-    ENV.j1 # Install can fail on multi-core machines unless serialized
+    ENV.deparallelize
     system "make osx-install"
   end
 end

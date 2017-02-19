@@ -8,8 +8,14 @@ homebrew-macvim
 This repository is inspired at [splhack](https://github.com/splhack/homebrew-splhack).
 
 ## Usage
+
+* Python 3.6
 ```bash
 $ brew install --HEAD kazuakim/macvim/macvim-kaoriya
+```
+* Python 3.5(stable)
+```bash
+$ brew install kazuakim/macvim/macvim-kaoriya
 ```
 
 ##Author

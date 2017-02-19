@@ -40,7 +40,7 @@ class MacvimKaoriya < Formula
       "--prefix=#{prefix}",
       '--with-features=huge',
       "--with-ruby-command=#{RUBY_WHICH}",
-      "--with-python3-config-dir=#{PYTHON3_CONFIG}/lib/python3.5/config-3.5m",
+      "--with-python3-config-dir=#{PYTHON3_CONFIG}/lib/python3.6/config-3.6m-darwin",
       '--with-luajit',
       "--with-lua-prefix=#{HOMEBREW_PREFIX}",
       '--with-tlib=ncurses'
