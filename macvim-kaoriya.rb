@@ -5,18 +5,15 @@ class MacvimKaoriya < Formula
   homepage 'https://github.com/splhack/macvim-kaoriya'
   head 'https://github.com/splhack/macvim.git'
 
-  option 'with-override-system-vim', 'Override system vim'
 
-  deprecated_option 'override-system-vim' => 'with-override-system-vim'
-
-  depends_on 'cmigemo-mk'                                      => :build
+  depends_on 'cmigemo-mk' => :build
   depends_on 'universal-ctags/universal-ctags/universal-ctags' => :build
-  depends_on 'gettext'                                         => :build
-  depends_on 'perl'                                            => :build
-  depends_on 'python3'                                         => :build
-  depends_on 'ruby'                                            => :build
-  depends_on 'lua'                                             => :build
-  depends_on 'luajit'                                          => :build
+  depends_on 'gettext' => :build
+  depends_on 'perl'    => :build
+  depends_on 'python3' => :build
+  depends_on 'ruby'    => :build
+  depends_on 'lua'     => :build
+  depends_on 'luajit'  => :build
 
   PYTHON3_CONFIG = `python3-config --prefix|tr -d '\n'`
   RUBY_WHICH     = `which ruby|tr -d '\n'`
@@ -48,22 +45,17 @@ class MacvimKaoriya < Formula
 
     prefix.install 'src/MacVim/build/Release/MacVim.app'
 
-    app     = prefix + 'MacVim.app/Contents'
-    macos   = app    + 'MacOS'
-    runtime = app    + 'Resources/vim/runtime'
+    app = prefix + 'MacVim.app/Contents'
+    bin = prefix + 'bin'
+    runtime = app + 'Resources/vim/runtime'
 
-    macos.install 'src/MacVim/mvim'
-    mvim = macos + 'mvim'
+    mkdir_p bin
     [
       'gview',   'gvim',     'gvimdiff',
-      'mview',   'mvimdiff',
-      'vimdiff', 'view'
+      'mview',   'mvim',     'mvimdiff',
+      'view',    'vim',      'vimdiff'
     ].each do |t|
-      ln_s 'mvim', macos + t
-    end
-    inreplace mvim do |s|
-      s.gsub! /^# (VIM_APP_DIR=).*/, "\\1`dirname \"$0\"`/../../.."
-      s.gsub! /^(binary=).*/, "\\1\"`(cd \"$VIM_APP_DIR/MacVim.app/Contents/MacOS\"; pwd -P)`/Vim\""
+      ln_s '../MacVim.app/Contents/bin/mvim', bin + t
     end
 
     dict = runtime + 'dict'
