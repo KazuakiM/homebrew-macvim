@@ -3,26 +3,25 @@
 # @url: https://github.com/caskroom/homebrew-cask/blob/master/.travis.yml
 # @url: http://docs.travis-ci.com/user/languages/objective-c/
 #
-language: objective-c
-os:
-  - osx
+language: ruby
 
-osx_image:     xcode8.2
-xcode_project: MacVim.xcodeproj
-xcode_scheme:  MacVim
-sudo:          false
+sudo: false
 
-# before_install steps
-# * update Homebrew
-# * set PATH according to env matrix
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode8.3
+      rvm: system
+  fast_finish: true
+
 before_install:
   - brew update || brew update
-  - brew install python3 ruby xctool
+  - brew install python3 ruby
 
-# install steps
-# * brew Formulae, install and version view
-install:
+script:
   - brew install --HEAD kazuakim/macvim/macvim-kaoriya
+
+after_success:
   - printenv PATH
   - /usr/bin/which ctags   && ctags   --version
   - /usr/bin/which lua     && lua     -v
