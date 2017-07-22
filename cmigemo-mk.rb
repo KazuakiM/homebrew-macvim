@@ -1,7 +1,10 @@
 class CmigemoMk < Formula
-  desc "migemo"
+  desc "Japanese increment search with 'Romanization of Japanese'"
   homepage "http://www.kaoriya.net/software/cmigemo"
-  head "https://github.com/koron/cmigemo", :using => :git
+  url "https://github.com/koron/cmigemo/archive/rel-1_2.tar.gz"
+  #sha1 "0ae4c8d3229644d8e7caad2b99596ff032e70a7c"
+  revision 1
+  head "https://github.com/koron/cmigemo.git"
 
   depends_on "nkf" => :build
 
@@ -15,5 +18,9 @@ class CmigemoMk < Formula
     end
     ENV.deparallelize
     system "make", "osx-install"
+  end
+
+  test do
+    system bin/"cmigemo", "--help"
   end
 end

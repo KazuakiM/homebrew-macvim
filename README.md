@@ -1,19 +1,14 @@
 homebrew-macvim
 ===
 
-[![](https://img.shields.io/travis/KazuakiM/homebrew-macvim.svg)](https://travis-ci.org/KazuakiM/homebrew-macvim)
-[![](https://img.shields.io/github/issues/KazuakiM/homebrew-macvim.svg)](https://github.com/KazuakiM/homebrew-macvim/issues)
-[![](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![TravisCI](https://travis-ci.org/KazuakiM/homebrew-macvim.svg?branch=master)](https://travis-ci.org/KazuakiM/homebrew-macvim)
+[![GitHub issues](https://img.shields.io/github/issues/KazuakiM/homebrew-macvim.svg?style=flat-square)](https://github.com/KazuakiM/homebrew-macvim/issues)
+[![license](https://img.shields.io/github/license/KazuakiM/homebrew-macvim.svg?style=flat-square)](https://raw.githubusercontent.com/KazuakiM/homebrew-macvim/master/LICENSE)
 
 This repository is inspired at [splhack](https://github.com/splhack/homebrew-splhack).
 
 ## Usage
 
-* Python 3.6
-```bash
-$ brew install --HEAD kazuakim/macvim/macvim-kaoriya
-```
-* Python 3.5(stable)
 ```bash
 $ brew install kazuakim/macvim/macvim-kaoriya
 ```
