@@ -30,6 +30,7 @@ class MacvimKaoriya < Formula
       "--enable-rubyinterp=dynamic",
       "--enable-perlinterp",
       "--enable-python3interp",
+      "--enable-terminal",
       "--prefix=#{prefix}",
       "--with-features=huge",
       "--with-python3-config-dir=#{HOMEBREW_PREFIX}/Frameworks/Python.framework/Versions/3.6/lib/python3.6/config-3.6m-darwin",
