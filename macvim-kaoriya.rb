@@ -14,6 +14,8 @@ class MacvimKaoriya < Formula
   depends_on "lua"     => :build
   depends_on "luajit"  => :build
 
+  RUBY_WHICH = `which ruby|tr -d '\n'`
+
   def install
     ENV.clang if MacOS.version >= :lion
 
@@ -27,12 +29,13 @@ class MacvimKaoriya < Formula
       "--enable-fail-if-missing",
       "--enable-luainterp",
       "--enable-multibyte",
-      "--enable-rubyinterp=dynamic",
+      "--enable-rubyinterp",
       "--enable-perlinterp",
       "--enable-python3interp",
       "--enable-terminal",
       "--prefix=#{prefix}",
       "--with-features=huge",
+      "--with-ruby-command=#{RUBY_WHICH}",
       "--with-python3-config-dir=#{HOMEBREW_PREFIX}/Frameworks/Python.framework/Versions/3.6/lib/python3.6/config-3.6m-darwin",
       "--with-luajit",
       "--with-lua-prefix=#{HOMEBREW_PREFIX}",
