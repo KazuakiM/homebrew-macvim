@@ -2,7 +2,7 @@ class MacvimKaoriya < Formula
   desc "GUI for vim, made for OS X"
   homepage "https://github.com/splhack/macvim-kaoriya"
   url "https://github.com/splhack/macvim/archive/20151225.tar.gz"
-  #sha1 "40da9b5f8ff5b757e3597fdbd0bab0f5c8c06ee4"
+  # sha1 "40da9b5f8ff5b757e3597fdbd0bab0f5c8c06ee4"
   revision 1
   head "https://github.com/splhack/macvim.git"
 
@@ -13,8 +13,6 @@ class MacvimKaoriya < Formula
   depends_on "python3" => :build
   depends_on "lua"     => :build
   depends_on "luajit"  => :build
-
-  RUBY_WHICH = `which ruby|tr -d '\n'`
 
   def install
     ENV.clang if MacOS.version >= :lion
@@ -35,8 +33,6 @@ class MacvimKaoriya < Formula
       "--enable-terminal",
       "--prefix=#{prefix}",
       "--with-features=huge",
-      "--with-ruby-command=#{RUBY_WHICH}",
-      "--with-python3-config-dir=#{HOMEBREW_PREFIX}/Frameworks/Python.framework/Versions/3.6/lib/python3.6/config-3.6m-darwin",
       "--with-luajit",
       "--with-lua-prefix=#{HOMEBREW_PREFIX}",
       "--with-tlib=ncurses"
@@ -65,6 +61,7 @@ class MacvimKaoriya < Formula
   end
 
   test do
-    system bin/"vim", "--version"
+    output = shell_output("#{bin}/mvim --version")
+    assert_match "+ruby", output
   end
 end
